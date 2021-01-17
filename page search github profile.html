@@ -1,0 +1,317 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Brief </title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        header {
+            width: 100%;
+            height: 80px;
+            line-height: 80px;
+            background-color: black;
+        }
+
+        header p {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 30px;
+        }
+
+        .search-container {
+            width: 100%;
+            height: 150px;
+            background-color: lightgray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+
+
+        }
+
+        .search {
+            margin: 0px;
+
+        }
+
+        #button {
+            display: inline-block;
+            border: none;
+            outline: none;
+            width: 50px;
+            background-color: black;
+            color: grey;
+            margin: 0px;
+
+        }
+
+        #input {
+            display: inline-block;
+
+            border: none;
+            outline: none;
+
+        }
+
+        .card {
+            width: 200px;
+            height: 250px;
+            border: 1px solid black;
+
+            margin: 15px;
+            text-align: center;
+
+
+
+            /* line-height: 90px; */
+        }
+
+        .card div:last-child {
+            vertical-align: top;
+
+
+        }
+
+        img {
+            width: 100%;
+            align-items: top;
+
+        }
+
+        span {
+            font-size: medium;
+            font-weight: bold;
+            align-items: center;
+
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            flex-wrap: wrap;
+            background-color: bisque;
+            height: 300px;
+
+        }
+
+        .username {
+            width: 200px;
+
+        }
+
+        /* ================================================================================ Model CSS */
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* ========================================================================= */
+    </style>
+
+
+</head>
+
+<body onload="getGithubInfo()">
+
+    <header>
+        <p>Github</p>
+
+    </header>
+
+    <div class="search-container">
+
+
+        <div class="search">
+            <input id="inputSearch" style="width: 400px; height: 50px; margin: 0px ;" type="text"><button id="button"
+                onclick="search()" style="height: 50px; margin: 0px;"><i class="fas fa-search"></i></button>
+
+        </div>
+    </div>
+
+
+    <div class="cards-container">
+        <div class="card">
+            <img id="image1" src="" alt=" javascript">
+            <span class="username" id="username1"> Username</span>
+        </div>
+        <div class="card">
+            <img id="image2" src="" alt=" javascript">
+            <span class="username" id="username2"> Username</span>
+        </div>
+        <div class="card">
+            <img id="image3" src="" alt=" javascript">
+            <span class="username" id="username3"> Username</span>
+        </div>
+        <div class="card">
+            <img id="image4" src="" alt=" javascript">
+            <span class="username" id="username4"> Username</span>
+        </div>
+    </div>
+
+    <!-- =============================== Model Box ==================================================== -->
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;" class="modal-content">
+            <span class="close">&times;</span>
+            <p style="font-size: 20px; font-weight: bold;" id="usersearch"></p>
+            <img id="imagesearchProfil" style="height: 300px;width: 250px;" src="" alt="">
+            <p id="folwers"> followers: <span id="numberFollowers"></span> </p>
+            
+            <button href="https://google.com" style="width: 250px; height: 30px; background-color: black; color: white;">Profile</button>
+        </div>
+
+    </div>
+    <!-- ======================================================================================================= -->
+
+    <script>
+        function getGithubInfo() {
+            var url = 'https://api.github.com/users';
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open('GET', url, false);
+            xmlhttp.send();
+
+            var data = xmlhttp.responseText;
+
+
+            if (xmlhttp.status === 200) {
+                // show the user details
+                var json = xmlhttp.responseText;
+                var user = JSON.parse(json);
+            } else {
+                // show an error
+            }
+            console.log(user);
+            // place image with id and src ....
+            document.getElementById('image1').src = user[0].avatar_url;
+            document.getElementById('image2').src = user[1].avatar_url;
+            document.getElementById('image3').src = user[2].avatar_url;
+            document.getElementById('image4').src = user[3].avatar_url;
+            // place username with id 
+            document.getElementById('username1').innerHTML = user[0].login;
+            document.getElementById('username2').innerHTML = user[1].login;
+            document.getElementById('username3').innerHTML = user[2].login;
+            document.getElementById('username4').innerHTML = user[3].login;
+
+
+
+        }
+        function search() {
+            var searchValue = document.getElementById('inputSearch').value;
+            var url = 'https://api.github.com/users/' + searchValue;
+            console.log(url);
+
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open('GET', url, false);
+            xmlhttp.send();
+
+            var data = xmlhttp.responseText;
+
+
+            if (xmlhttp.status === 200) {
+                // show the user details
+                var json = xmlhttp.responseText;
+                var user = JSON.parse(json);
+            } else {
+                alert(" pas de user avec ce idantifiant ")
+            }
+            console.log(user);
+            // ================================== script Mode box ===================
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            // var btn = document.getElementById("myBtn");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on the button, open the modal
+            
+                modal.style.display = "block";
+                document.getElementById('usersearch').innerHTML= user.login   ; 
+                document.getElementById('imagesearchProfil').src= user.avatar_url;
+                document.getElementById('numberFollowers').innerHTML= user.followers   ; 
+
+
+            
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+
+        }
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

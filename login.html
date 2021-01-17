@@ -1,0 +1,179 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-color: #f4efef;
+
+        }
+
+        header {
+            width: 100%;
+            height: 80px;
+            background-color: black;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-left: 30px;
+
+        }
+
+        .container {
+            width: 100%;
+            height: 500px;
+            background-color: #f0f4f7;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+
+        }
+
+        .imgInterface {
+            /* border: 1px solid black; */
+            width: 400px;
+            height: 450px;
+            margin: 5px;
+            background-color: #f0f4f7;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .inputs {
+            border: none;
+            width: 400px;
+            height: 450px;
+            margin: 5px;
+            background-color: #f0f4f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px grey;
+
+
+        }
+
+        #usernameLogin,
+        #passwordLogin,
+        #confirmPassword {
+            width: 300px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f4f7;
+            box-shadow: 2px 2px 4px grey;
+            margin: 20px;
+            padding-left: 15px;
+        }
+
+        #btn {
+            width: 150px;
+            height: 30px;
+            background-color: black;
+            color: white;
+            border-radius: 50px;
+            border: none;
+            margin: 10px;
+
+        }
+
+        .inputSignup {
+            display: flex;
+            flex-direction: column;
+
+
+        }
+    </style>
+</head>
+
+<body >
+    <header>
+        <p>Github</p>
+
+    </header>
+
+    <div class="container">
+        <div class="imgInterface">
+            <img style=" height: 250px; width: 220px;" src="image-github.png" alt="image-githubs">
+
+        </div>
+        <div class="inputs">
+            <p style="font-size: 25px;font-weight: bold;">Github.</p>
+            <div class="inputSignup">
+
+
+                <label style="margin-left: 30px; font-weight: bold;"> Username</label>
+                <input id="usernameLogin" type="text">
+                <label style="margin-left: 30px; font-weight: bold;">Password</label>
+                <input id="passwordLogin" type="password">
+                <label style="margin-left: 20px; color: grey; font-size: 13px;">Forget Password ?</label>
+
+
+            </div>
+            <button id="btn" onclick="login()">Login</button>
+            <label style="color: grey; font-size: 13px; "> Not member <span style="font-weight: bold; ">
+                    <a href="url">Singup</a></span></label>
+
+
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            // stored local storage in variables 
+
+            var storedUsername = localStorage.getItem('username');
+            var storedPassword = localStorage.getItem('password');
+            console.log(storedUsername);
+            console.log(storedPassword);
+
+            // store  values of inputs in variables
+
+            var usernameLogin = document.getElementById('usernameLogin');
+            var passwordLogin = document.getElementById('passwordLogin');
+            console.log(usernameLogin.value);
+            console.log(passwordLogin.value);
+
+            // check if values of inputs login equal to stored variables
+
+            if( usernameLogin.value == storedUsername && passwordLogin.value == storedPassword ){
+                alert('Good');
+
+                window.location.replace("page search github profile.html");
+            }else{
+                alert(' le mot de passe ou le  username est incorect  ')
+            }
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
