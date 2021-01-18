@@ -138,28 +138,42 @@
         function join() {
             var password = document.getElementById('password');
             var confirmPassword = document.getElementById('confirmPassword');
-            if (password.value == confirmPassword.value) {
+            var username = document.getElementById('username');
+
+
+            if (username.value == '' || password.value == '') {
+                alert(' les champs sont vides');
+
+
+            }
+            else if (password.value == confirmPassword.value) {
                 alert('Good');
-
-
-
-               
-
                 localStorage.setItem('username', username.value);
                 localStorage.setItem('password', password.value);
+                window.location.replace("login.html");
 
 
 
             }
-            else{
-                alert(' Le mot de passe est incorect !!')
+
+
+
+
+
+
+
+
+            else {
+                alert(' Le mot de passe est incorect !! ');
             }
-
-
-
-
 
         }
+
+
+
+
+
+
 
 
 
